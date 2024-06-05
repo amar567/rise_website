@@ -4,401 +4,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RISE</title>
+
+    <link href='//fonts.googleapis.com/css?family=Signika+Negative:300,400,600' rel='stylesheet' type='text/css'>
 
     <style>
+        .panel.align-top {
+            align-items: flex-start;
+        }
+
+        .panel h1 {
+            font-size: 1.8em;
+            color: white;
+            font-weight: 300;
+            margin: 0 auto;
+        }
+
+        .panel.description {
+            padding-bottom: 60px;
+        }
+
+        .panel p,
+        .panel li {
+            color: black;
+            font-weight: 400;
+            text-align: left;
+            font-size: 0.8em;
+            line-height: 1.5em;
+            margin: 0.3em 0 1em 0;
+        }
+
+        .panel p strong,
+        .panel li strong {
+            /* color: white; */
+            font-weight: 400;
+        }
+
+        .panel p code,
+        .panel li code {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 2px 4px;
+            border-radius: 5px;
+        }
+
+        .panel li {
+            margin: 0;
+        }
+
         html,
         body {
-            margin: 0px;
-            padding: 0px;
+            margin: 0;
+            /* height: 100%; */
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+            font-family: "Signika Negative", sans-serif, Arial;
+        }
+
+        .panel {
             width: 100%;
             height: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.5em;
+            text-align: center;
+            /* color: white; */
+            position: relative;
+            box-sizing: border-box;
+            padding: 10px;
+            background-color: white;
         }
 
         body {
-            background-color: black;
+            overflow-x: hidden;
+            overflow-y: scroll;
         }
 
-        canvas {
-            border: 0px solid black;
-        }
-
-        div {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #menuToggle {
-            display: block;
-            position: relative;
-            top: 50px;
-            left: 50px;
-
-            z-index: 1;
-
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        #menuToggle a {
-            text-decoration: none;
-            color: #232323;
-
-            transition: color 0.3s ease;
-        }
-
-        #menuToggle a:hover {
-            color: tomato;
-        }
-
-
-        #menuToggle input {
-            display: block;
-            width: 40px;
-            height: 32px;
-            position: absolute;
-            top: -7px;
-            left: -5px;
-
-            cursor: pointer;
-
-            opacity: 0;
-            /* hide this */
-            z-index: 2;
-            /* and place it over the hamburger */
-
-            -webkit-touch-callout: none;
-        }
-
-        /*
- * Just a quick hamburger
- */
-        #menuToggle span {
-            display: block;
-            width: 33px;
-            height: 4px;
-            margin-bottom: 5px;
-            position: relative;
-
-            background: #cdcdcd;
-            border-radius: 3px;
-
-            z-index: 1;
-
-            transform-origin: 4px 0px;
-
-            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-                background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-                opacity 0.55s ease;
-        }
-
-        #menuToggle span:first-child {
-            transform-origin: 0% 0%;
-        }
-
-        #menuToggle span:nth-last-child(2) {
-            transform-origin: 0% 100%;
-        }
-
-        /* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
-        #menuToggle input:checked~span {
-            opacity: 1;
-            transform: rotate(45deg) translate(-2px, -1px);
-            background: #232323;
-        }
-
-        /*
- * But let's hide the middle one.
- */
-        #menuToggle input:checked~span:nth-last-child(3) {
-            opacity: 0;
-            transform: rotate(0deg) scale(0.2, 0.2);
-        }
-
-        /*
- * Ohyeah and the last one should go the other direction
- */
-        #menuToggle input:checked~span:nth-last-child(2) {
-            transform: rotate(-45deg) translate(0, -1px);
-        }
-
-        /*
- * Make this absolute positioned
- * at the top left of the screen
- */
-        #menu {
-            position: absolute;
-            width: 300px;
-            margin: -100px 0 0 -50px;
-            padding: 50px;
-            padding-top: 125px;
-
-            background: #ededed;
-            list-style-type: none;
-            -webkit-font-smoothing: antialiased;
-            /* to stop flickering of text in safari */
-
-            transform-origin: 0% 0%;
-            transform: translate(-100%, 0);
-
-            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-        }
-
-        #menu li {
-            padding: 10px 0;
-            font-size: 22px;
-        }
-
-        /*
- * And let's slide it in from the left
- */
-        #menuToggle input:checked~ul {
-            transform: none;
-        }
     </style>
 
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js?r=cahcebustin"></script>
     <script>
-        window.console = window.console || function (t) { };
-    </script>
+        // arrow animations
 
-    <!-- <script>
-        if (document.location.search.match(/type=embed/gi)) {
-            window.parent.postMessage("resize", "*");
+        let arrow = document.querySelector('.arrow');
+        let arrowRight = document.querySelector('.arrow-right');
+
+        if (arrow) {
+            gsap.to(arrow, { y: 12, ease: "power1.inOut", repeat: -1, yoyo: true });
         }
-    </script> -->
 
-<body translate="no">
+        if (arrowRight) {
+            gsap.to(arrowRight, { x: -12, ease: "power1.inOut", repeat: -1, yoyo: true });
+        }
 
-    <!--    Made by Erik Terwan    -->
-    <!--   24th of November 2015   -->
-    <!--        MIT License        -->
-    <nav role="navigation" style="position: fixed;z-index: 100;">
-        <div id="menuToggle">
-            <!--
-      A fake / hidden checkbox is used as click reciever,
-      so you can use the :checked selector on it.
-      -->
-            <input type="checkbox" />
+    </script>
+</head>
 
-            <!--
-      Some spans to act as a hamburger.
-      
-      They are acting like a real hamburger,
-      not that McDonalds stuff.
-      -->
-            <span></span>
-            <span></span>
-            <span></span>
-
-            <!--
-      Too bad the menu has to be inside of the button
-      but hey, it's pure CSS magic.
-      -->
-            <ul id="menu">
-                <a href="#">
-                    <li>Home</li>
-                </a>
-                <a href="#">
-                    <li>About</li>
-                </a>
-                <a href="#">
-                    <li>Info</li>
-                </a>
-                <a href="#">
-                    <li>Contact</li>
-                </a>
-                <a href="https://erikterwan.com/" target="_blank">
-                    <li>Show me more</li>
-                </a>
-            </ul>
-        </div>
-    </nav>
-
-    <div
-        style="width: inherit;height: inherit;background-image: url(./assets/bg.jpg);background-size: cover;display: flex;justify-content: center;align-items: center;z-index: 0;">
-        <div style="width: inherit;height: inherit;z-index: 2;display: flex;flex-direction: column;">
-            <img src="./assets/logo.png" alt="" srcset="" width="30%">
-            <!-- <h1
-                style="color: white;font-size: 4rem;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-                Transforming Science to Buisness</h1> -->
-        </div>
-        <div
-            style="width: inherit;height: 50%;background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);position: absolute;bottom: 0;z-index: 1;">
-        </div>
+<body>
+    <img src="../imgs/mockups/static/Frame 23.png" style="position: sticky;top: 0;width: 100%;z-index: 100000;" alt="">
+    <div class="panel">
+        <img src="../imgs/mockups/static/Frame 19.png" alt="">
     </div>
+    <section class="panel ">
+        <img src="../imgs/mockups/static/Frame 20.png" alt="">
+    </section>
+    <section class="panel ">
+        <img src="../imgs/mockups/static/Frame 21.png" alt="">
+    </section>
+    <section class="panel">
+        <img src="../imgs/mockups/static/Frame 22.png" alt="">
+    </section>
+    <!-- <section class="panel">
+    </section> -->
 
-    <div
-        style="width: inherit;display: flex;justify-content: center;align-items: center;z-index: 0;position: relative;">
-        <div
-            style="width: inherit;height: 10%;background: linear-gradient(0deg,rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);position: absolute;top: 0;z-index: 2;">
-        </div>
-        <canvas id="glcanvas" style="z-index: 1;"></canvas>
-    </div>
 
 
-    <script src="./orb.js"></script>
-    <!-- <script src="./stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js.download"></script> -->
 
-    <script id="rendered-js">
-        "use strict";
 
-        function Sketch(height = document.documentElement.clientHeight, width = document.documentElement.clientWidth) {
-            let time = 0.0;
-            let canvas = document.getElementById("glcanvas");
-            canvas.height = height;
-            canvas.width = width;
-            const gl = canvas.getContext("webgl2", {
-                antialias: true
+    <script>
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        let panels = gsap.utils.toArray(".panel");
+        // we'll create a ScrollTrigger for each panel just to track when each panel's top hits the top of the viewport (we only need this for snapping)
+        let tops = panels.map(panel => ScrollTrigger.create({ trigger: panel, start: "top top" }));
+
+        panels.forEach((panel, i) => {
+            ScrollTrigger.create({
+                trigger: panel,
+                start: () => panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom", // if it's shorter than the viewport, we prefer to pin it at the top
+                pin: true,
+                pinSpacing: false
             });
-            if (!gl) {
-                alert("Your browser dosen't support WebGL !");
-            }
-            gl.clearColor(0.0, 0.0, 0.0, 1.0);
-            // Clear the color buffer with specified clear color
-            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-            const {
-                mat4,
-                vec3
-            } = glMatrix;
-            const SphereGeometry = pointsNumber => {
-                const points = [];
-                for (let i = 0; i < pointsNumber; i++) {
-                    const r = () => Math.random() - 0.5;
-                    const inputPoints = [r(), r(), r()];
-                    // console.log(inputPoints)
-                    const outputPoints = vec3.random(vec3.create(inputPoints));
-                    // console.log(outputPoints)
-                    points.push(...outputPoints);
-                }
-                return points;
-            };
-            const vertexData = SphereGeometry(2 * 1e4);
-            // console.log(vertexData);
-            function randomColor() {
-                return [Math.random(), Math.random(), Math.random()];
-            }
-            let colorData = [];
-            for (let face = 0; face < 6; face++) {
-                let faceColor = randomColor();
-                for (let vertex = 0; vertex < 6; vertex++) {
-                    colorData.push(...faceColor);
-                }
-            }
-            //point buffer
-            const buffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexData), gl.STATIC_DRAW);
-            //color buffer
-            const colorBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colorData), gl.STATIC_DRAW);
-            const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-            gl.shaderSource(
-                vertexShader,
-                `
-      precision mediump float;
-  
-      attribute vec3 position;
-      attribute vec3 color;
-  
-      uniform mat4 modelMatrix;
-      uniform float time;
-  
-      varying vec3 vColor;
-      varying vec3 vPos;
-      varying vec3 vUv;
-  
-      void main(){
-          vColor = vec3(position.xy, 1.0);
-          vUv = position;
-          vec3 pos = position;
-          pos.x += 1.7*sin(cos(time)+sin(2.*time)+sin(7.*time) + 1.*pos.y);
-          pos.y += 1.7*cos(sin(time)+cos(2.*time)+cos(7.*time) + 1.*pos.x);
+        });
 
-          vPos = pos;
-          gl_Position = modelMatrix * vec4(pos,1);
-          gl_PointSize = 2.0;
-      }
-  `);
-            gl.compileShader(vertexShader);
-            const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-            gl.shaderSource(
-                fragmentShader,
-                `
-      precision mediump float;
-  
-      uniform float time;
-  
-      varying vec3 vColor;
-      varying vec3 vPos;
-      varying vec3 vUv;
-  
-      void main(){
-          gl_FragColor = vec4(vColor, 1.0);
-      }
-  `);
-            gl.compileShader(fragmentShader);
-            const program = gl.createProgram();
-            gl.attachShader(program, vertexShader);
-            gl.attachShader(program, fragmentShader);
-            gl.linkProgram(program);
-            const positionLocation = gl.getAttribLocation(program, "position");
-            gl.enableVertexAttribArray(positionLocation);
-            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-            gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0);
-            const colorLocation = gl.getAttribLocation(program, "color");
-            gl.enableVertexAttribArray(colorLocation);
-            gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-            gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false, 0, 0);
-            gl.useProgram(program);
-            gl.enable(gl.DEPTH_TEST);
-            //uniforms
-            const uniformLocations = {
-                modelMatrix: gl.getUniformLocation(program, "modelMatrix"),
-                time: gl.getUniformLocation(program, "time")
-            };
-            const modelMatrix = mat4.create();
-            const projectionMatrix = mat4.create();
-            const viewMatrix = mat4.create();
-            mat4.perspective(
-                projectionMatrix,
-                75 * Math.PI / 180, //Field View
-                canvas.width / canvas.height, //aspect ratio
-                0.0001, // near view limits
-                10000 // far view limits
-            );
-            mat4.scale(modelMatrix, modelMatrix, [0.5, 0.5, 0.5]);
-            mat4.translate(modelMatrix, modelMatrix, [0, 0, -2]);
-            const modelViewMatrix = mat4.create();
-            const mpvMatrix = mat4.create();
-            mat4.translate(viewMatrix, viewMatrix, [0, 0, 0]);
-            mat4.invert(viewMatrix, viewMatrix);
-
-            function animate() {
-                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-                mat4.rotateX(modelMatrix, modelMatrix, 0.01);
-                mat4.rotateY(modelMatrix, modelMatrix, 0.01);
-                // mat4.rotateZ(modelMatrix, modelMatrix, 0.01);
-                mat4.multiply(modelViewMatrix, modelMatrix, viewMatrix);
-                mat4.multiply(mpvMatrix, projectionMatrix, modelViewMatrix);
-                gl.uniformMatrix4fv(uniformLocations.modelMatrix, false, mpvMatrix);
-                gl.uniform1f(uniformLocations.time, time);
-                gl.drawArrays(gl.POINTS, 0, vertexData.length / 3);
-                time += 0.003;
-                requestAnimationFrame(animate);
+        ScrollTrigger.create({
+            snap: {
+                snapTo: (progress, self) => {
+                    let panelStarts = tops.map(st => st.start), // an Array of all the starting scroll positions. We do this on each scroll to make sure it's totally responsive. Starting positions may change when the user resizes the viewport
+                        snapScroll = gsap.utils.snap(panelStarts, self.scroll()); // find the closest one
+                    return gsap.utils.normalize(0, ScrollTrigger.maxScroll(window), snapScroll); // snapping requires a progress value, so convert the scroll position into a normalized progress value between 0 and 1
+                },
+                duration: 1000000
             }
-            animate();
-        }
-        Sketch();
-        //# sourceURL=pen.js
+        });
+
+
     </script>
-
 </body>
 
 </html>

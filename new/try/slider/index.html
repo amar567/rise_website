@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+
+        .container{
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .sliderContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 1800px;
+            /* overflow-x: scroll;
+            overflow-y: hidden; */
+        }
+
+        .sliderBoxes {
+            width: 180px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0px 10px;
+            border-radius: 15px;
+            transition: 0.4s;
+        }
+
+        .sliderBoxes:hover {
+            width: 400px;
+            height: 400px;
+        }
+
+        .sliderBoxes .sliderImage {
+            width: unset;
+            height: 400px;
+        }
+
+        .sliderBoxes .sliderImage:hover {
+            width: unset;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sliderContainer">
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c91f906b-5881-47b1-89e4-e4a69c1961a7"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/5bc859f0-db4f-4ab4-8f5f-e55977c33eb1"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/d239a63a-a0f8-4213-82dc-bb8d3f0806db"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/9c0637aa-b440-4aef-93f3-ea20cf19f42c"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/6a90b5ba-9f3e-4cb3-a8e2-3ae19b2aa443"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/fe05145f-c9ab-457f-a91b-92a4c1bd633c"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/1158c3d4-81d5-4dfc-bb42-863f357ecdb5"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c8ef23d2-37ee-4473-ad86-d9c9911be3bb"></img>
+            </div>
+            <div class="sliderBoxes">
+                <img class="sliderImage"
+                    src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/29eff421-1087-4b51-92a2-a7f204098187"></img>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
