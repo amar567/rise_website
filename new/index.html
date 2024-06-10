@@ -6,155 +6,326 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RISE</title>
 
-    <link href='//fonts.googleapis.com/css?family=Signika+Negative:300,400,600' rel='stylesheet' type='text/css'>
-
     <style>
-        .panel.align-top {
-            align-items: flex-start;
-        }
-
-        .panel h1 {
-            font-size: 1.8em;
-            color: white;
-            font-weight: 300;
-            margin: 0 auto;
-        }
-
-        .panel.description {
-            padding-bottom: 60px;
-        }
-
-        .panel p,
-        .panel li {
-            color: black;
-            font-weight: 400;
-            text-align: left;
-            font-size: 0.8em;
-            line-height: 1.5em;
-            margin: 0.3em 0 1em 0;
-        }
-
-        .panel p strong,
-        .panel li strong {
-            /* color: white; */
-            font-weight: 400;
-        }
-
-        .panel p code,
-        .panel li code {
-            background-color: rgba(255, 255, 255, 0.15);
-            padding: 2px 4px;
-            border-radius: 5px;
-        }
-
-        .panel li {
-            margin: 0;
-        }
-
         html,
-        body {
+        body,
+        div {
             margin: 0;
+            border: 0;
             /* height: 100%; */
-            -webkit-overflow-scrolling: touch;
-            overflow-scrolling: touch;
-            font-family: "Signika Negative", sans-serif, Arial;
+            /* -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch; */
+            /* font-family: "Signika Negative", sans-serif, Arial; */
         }
 
-        .panel {
-            width: 100%;
-            height: 100%;
-            min-height: 100vh;
+        .landing_left_container {
+            height: 80vh;
+            width: 75%;
+            border-radius: 20rem 8px 20rem 8px;
+            background-color: #001AFF;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            font-weight: 600;
-            font-size: 1.5em;
-            text-align: center;
-            /* color: white; */
-            position: relative;
+            overflow: hidden
+        }
+
+        .landing_left_container img {
+            object-fit: cover;
+            min-width: 100%;
+            min-height: 100%
+        }
+
+        .landing_right_container {
+            height: 80vh;
+            flex-grow: 1;
+            overflow: hidden;
+            border-radius: 8px 0rem 8px 20rem;
+            background-color: #001AFF;
+        }
+
+        .landing_separator {
+            width: 10px;
+        }
+
+        .heroSectionContainer {
+            height: 100vh;
+            width: inherit;
+            padding: 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        /* carousel */
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            padding: 10px;
-            background-color: white;
-            /* padding-top: 10vh; */
         }
 
-        body {
-            overflow-x: hidden;
-            overflow-y: scroll;
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            font-size: 2.5vmin;
         }
 
+        .carousel-slider {
+            display: flex;
+            transition: 0.3s;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+        }
+
+        .carousel-slide img {
+            display: block;
+            width: 100%;
+            height: 36em;
+            object-fit: cover;
+        }
+
+        .carousel button {
+            font-size: inherit;
+        }
+
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        .carousel-prev {
+            left: 2em;
+        }
+
+        .carousel-next {
+            right: 2em;
+        }
+
+        .carousel-navigation {
+            position: absolute;
+            bottom: 1em;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .carousel-bullet {
+            width: 1em;
+            height: 1em;
+            border: none;
+            background: #fff;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .carousel-bullet.is-active {
+            background: #1c69d3;
+        }
     </style>
 
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js?r=cahcebustin"></script>
-    <script>
-        // arrow animations
-
-        let arrow = document.querySelector('.arrow');
-        let arrowRight = document.querySelector('.arrow-right');
-
-        if (arrow) {
-            gsap.to(arrow, { y: 12, ease: "power1.inOut", repeat: -1, yoyo: true });
-        }
-
-        if (arrowRight) {
-            gsap.to(arrowRight, { x: -12, ease: "power1.inOut", repeat: -1, yoyo: true });
-        }
-
-    </script>
 </head>
 
 <body>
-    <img src="../imgs/mockups/static/Frame 23.png" style="position: fixed;top: 0;width: 100%;z-index: 100000;" alt="">
-    <div class="panel">
-        <img src="../imgs/mockups/static/Frame 19.png" alt="">
+    <div class="heroSectionContainer">
+        <!-- <div
+            style="width: 100vh;height: 100vh;background-image: radial-gradient(circle,rgba(255,255,255,1) 8%, rgba(255, 255, 255, 0) 70%);top: -40vh;left: -40vh;background-color: rgba(0, 0, 0, 0);position: absolute;opacity: 0.9;">
+        </div> -->
+
+        <div
+            style="width: 100vh;height: 100vh;border-radius: 50%;position: absolute;top: -40vh;left: -40vh;background-color: white;-webkit-filter: blur(150px);z-index: 100;">
+        </div>
+
+        <!-- left leaf -->
+        <div class="landing_left_container">
+            <!-- <img src="/imgs/bg1.png" style="width: -webkit-fill-available;opacity: 0.5;z-index: 2;" alt=""> -->
+            <div class="carousel" role="group" aria-label="infinite loop carousel demo" aria-roledescription="carousel"
+                style="width: -webkit-fill-available;opacity: 0.5;z-index: 2;">
+                <div class="carousel-slider" id="slides" aria-atomic="false" aria-live="off">
+                    <div class="carousel-slide" id="slide1" role="group" aria-label="1 of 6"
+                        aria-roledescription="slide"><img src="https://via.placeholder.com/800x350/0bf?text=image1"
+                            alt="Image 1"></div>
+                    <div class="carousel-slide" id="slide2" role="group" aria-label="2 of 6"
+                        aria-roledescription="slide"><img src="https://via.placeholder.com/800x350/fb0?text=image2"
+                            alt="Image 2"></div>
+                    <div class="carousel-slide" id="slide3" role="group" aria-label="3 of 6"
+                        aria-roledescription="slide"><img src="https://via.placeholder.com/800x350/b0f?text=image3"
+                            alt="Image 3"></div>
+                    <div class="carousel-slide" id="slide4" role="group" aria-label="4 of 6"
+                        aria-roledescription="slide"><img src="https://via.placeholder.com/800x350/0bf?text=image4"
+                            alt="Image 4"></div>
+                    <div class="carousel-slide" id="slide5" role="group" aria-label="5 of 6"
+                        aria-roledescription="slide"><img src="https://via.placeholder.com/800x350/0fb?text=image5"
+                            alt="Image 5"></div>
+                    <div class="carousel-slide" id="slide6" role="group" aria-label="6 of 6"
+                        aria-roledescription="slide"><img src="https://via.placeholder.com/800x350/f0b?text=image6"
+                            alt="Image 6"></div>
+                </div>
+            </div>
+        </div>
+        <div class="landing_separator"></div>
+        <div class="landing_right_container">
+            <img src="/imgs/bg2.png" style="width: inherit;opacity: 0.5;z-index: 2;" alt="">
+        </div>
     </div>
-    <section class="panel ">
-        <img src="../imgs/mockups/static/Frame 20.png" alt="">
-    </section>
-    <section class="panel ">
-        <img src="../imgs/mockups/static/Frame 21.png" alt="">
-    </section>
-    <section class="panel">
-        <img src="../imgs/mockups/static/Frame 22.png" alt="">
-    </section>
-    <!-- <section class="panel">
-    </section> -->
-
-
-
-
 
     <script>
+        // DOM utility functions:
 
-        gsap.registerPlugin(ScrollTrigger);
+        const el = (sel, par) => (par || document).querySelector(sel);
+        const els = (sel, par) => (par || document).querySelectorAll(sel);
+        const elNew = (tag, prop) => Object.assign(document.createElement(tag), prop);
 
-        let panels = gsap.utils.toArray(".panel");
-        // we'll create a ScrollTrigger for each panel just to track when each panel's top hits the top of the viewport (we only need this for snapping)
-        let tops = panels.map(panel => ScrollTrigger.create({ trigger: panel, start: "top top" }));
+        // Helper functions:
 
-        panels.forEach((panel, i) => {
-            ScrollTrigger.create({
-                trigger: panel,
-                start: () => panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom", // if it's shorter than the viewport, we prefer to pin it at the top
-                pin: true,
-                pinSpacing: false
+        const mod = (n, m) => (n % m + m) % m;
+
+        // Task: Carousel:
+
+        const carousel = (elCarousel) => {
+
+            const animation = 500;
+            const pause = 5000;
+            // Or use something like: const animation = Math.abs(elCarousel.dataset.carouselAnimation ?? 500);
+
+            const elCarouselSlider = el(".carousel-slider", elCarousel);
+            const elsSlides = els(".carousel-slide", elCarouselSlider);
+            const elsBtns = [];
+
+            let itv; // Autoslide interval
+            let tot = elsSlides.length; // Total slides
+            let c = 0;
+
+            if (tot < 2) return; // Not enough slides. Do nothing.
+
+            // Methods:
+            const anim = (ms = animation) => {
+                const cMod = mod(c, tot);
+                // Move slider
+                elCarouselSlider.style.transitionDuration = `${ms}ms`;
+                elCarouselSlider.style.transform = `translateX(${(-c - 1) * 100}%)`;
+                // Handle active classes (slide and bullet)
+                elsSlides.forEach((elSlide, i) => elSlide.classList.toggle("is-active", cMod === i));
+                elsBtns.forEach((elBtn, i) => {
+                    elBtn.classList.toggle("is-active", cMod === i);
+                    elBtn.setAttribute('aria-disabled', cMod === i);
+                });
+            };
+
+            const prev = () => {
+                if (c <= -1) return; // prevent blanks on fast prev-click
+                c -= 1;
+                anim();
+            };
+
+            const next = () => {
+                if (c >= tot) return; // prevent blanks on fast next-click
+                c += 1;
+                anim();
+            };
+
+            const goto = (index) => {
+                c = index;
+                anim();
+            };
+
+            const play = () => {
+                elCarouselSlider.setAttribute("aria-live", "off");
+                itv = setInterval(next, pause + animation);
+            };
+
+            const stop = () => {
+                clearInterval(itv);
+                elCarouselSlider.setAttribute("aria-live", "polite");
+            };
+
+            // Buttons:
+
+            // const elPrev = elNew("button", {
+            //     type: "button",
+            //     className: "carousel-prev",
+            //     innerHTML: "<span>Prev</span>",
+            //     onclick: () => prev(),
+            // });
+            // elPrev.setAttribute("aria-controls", "slides");
+            // elPrev.setAttribute("aria-label", "Previous slide");
+
+            // const elNext = elNew("button", {
+            //     type: "button",
+            //     className: "carousel-next",
+            //     innerHTML: "<span>Next</span>",
+            //     onclick: () => next(),
+            // });
+            // elNext.setAttribute("aria-controls", "slides");
+            // elNext.setAttribute("aria-label", "Next slide");
+
+            // Navigation:
+
+            const elNavigation = elNew("div", {
+                className: "carousel-navigation",
+                role: "group"
             });
-        });
+            elNavigation.setAttribute("aria-label", "Choose slide to display");
 
-        ScrollTrigger.create({
-            snap: {
-                snapTo: (progress, self) => {
-                    let panelStarts = tops.map(st => st.start), // an Array of all the starting scroll positions. We do this on each scroll to make sure it's totally responsive. Starting positions may change when the user resizes the viewport
-                        snapScroll = gsap.utils.snap(panelStarts, self.scroll()); // find the closest one
-                    return gsap.utils.normalize(0, ScrollTrigger.maxScroll(window), snapScroll); // snapping requires a progress value, so convert the scroll position into a normalized progress value between 0 and 1
-                },
-                duration: 1000000
+            // Navigation bullets:
+
+            for (let i = 0; i < tot; i++) {
+                const elBtn = elNew("button", {
+                    type: "button",
+                    className: "carousel-bullet",
+                    onclick: () => goto(i)
+                });
+                elBtn.setAttribute("aria-labelledby", `slide${i + 1}`)
+                elsBtns.push(elBtn);
             }
-        });
 
 
+            // Events:
+
+            // Infinite slide effect:
+            elCarouselSlider.addEventListener("transitionend", () => {
+                if (c <= -1) c = tot - 1;
+                if (c >= tot) c = 0;
+                anim(0); // quickly switch to "c" slide (with animation duration 0)
+            });
+
+            // Pause on pointer enter:
+            elCarousel.addEventListener("pointerenter", () => stop());
+            elCarousel.addEventListener("pointerleave", () => play());
+
+            // Pause on focus:
+            elCarousel.addEventListener("focus", () => stop(), true);
+            elCarousel.addEventListener("blur", () => play(), true);
+
+            // Init:
+
+            // Insert UI elements:
+            // elNavigation.append(...elsBtns);
+            // elCarousel.append(elPrev, elNext, elNavigation);
+
+            // Clone first and last slides (for "infinite" slider effect)
+            elCarouselSlider.prepend(elsSlides[tot - 1].cloneNode(true));
+            elCarouselSlider.append(elsSlides[0].cloneNode(true));
+
+            // Initial slide
+            anim(0);
+
+            // Start autoplay
+            play();
+        };
+
+        // Allows to use multiple carousels on the same page:
+        els(".carousel").forEach(carousel);
     </script>
 </body>
 

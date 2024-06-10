@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISE</title>
+
+    <link href='//fonts.googleapis.com/css?family=Signika+Negative:300,400,600' rel='stylesheet' type='text/css'>
+
+    <style>
+        .panel.align-top {
+            align-items: flex-start;
+        }
+
+        .panel h1 {
+            font-size: 1.8em;
+            color: white;
+            font-weight: 300;
+            margin: 0 auto;
+        }
+
+        .panel.description {
+            padding-bottom: 60px;
+        }
+
+        .panel p,
+        .panel li {
+            color: black;
+            font-weight: 400;
+            text-align: left;
+            font-size: 0.8em;
+            line-height: 1.5em;
+            margin: 0.3em 0 1em 0;
+        }
+
+        .panel p strong,
+        .panel li strong {
+            /* color: white; */
+            font-weight: 400;
+        }
+
+        .panel p code,
+        .panel li code {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 2px 4px;
+            border-radius: 5px;
+        }
+
+        .panel li {
+            margin: 0;
+        }
+
+        html,
+        body {
+            margin: 0;
+            /* height: 100%; */
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+            font-family: "Signika Negative", sans-serif, Arial;
+        }
+
+        .panel {
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-weight: 600;
+            font-size: 1.5em;
+            text-align: center;
+            /* color: white; */
+            position: relative;
+            box-sizing: border-box;
+            padding: 10px;
+            background-color: white;
+            /* padding-top: 10vh; */
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+    </style>
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js?r=cahcebustin"></script>
+    <script>
+        // arrow animations
+
+        let arrow = document.querySelector('.arrow');
+        let arrowRight = document.querySelector('.arrow-right');
+
+        if (arrow) {
+            gsap.to(arrow, { y: 12, ease: "power1.inOut", repeat: -1, yoyo: true });
+        }
+
+        if (arrowRight) {
+            gsap.to(arrowRight, { x: -12, ease: "power1.inOut", repeat: -1, yoyo: true });
+        }
+
+    </script>
+</head>
+
+<body>
+    <img src="../../imgs/mockups/static/Frame 23.png" style="position: fixed;top: 0;width: 100%;z-index: 100000;" alt="">
+    <div class="panel">
+        <img src="../../imgs/mockups/static/Frame 19.png" alt="">
+    </div>
+    <section class="panel ">
+        <img src="../../imgs/mockups/static/Frame 20.png" alt="">
+    </section>
+    <section class="panel ">
+        <img src="../../imgs/mockups/static/Frame 21.png" alt="">
+    </section>
+    <section class="panel">
+        <img src="../../imgs/mockups/static/Frame 22.png" alt="">
+    </section>
+    <!-- <section class="panel">
+    </section> -->
+
+
+
+
+
+    <script>
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        let panels = gsap.utils.toArray(".panel");
+        // we'll create a ScrollTrigger for each panel just to track when each panel's top hits the top of the viewport (we only need this for snapping)
+        let tops = panels.map(panel => ScrollTrigger.create({ trigger: panel, start: "top top" }));
+
+        panels.forEach((panel, i) => {
+            ScrollTrigger.create({
+                trigger: panel,
+                start: () => panel.offsetHeight < window.innerHeight ? "top top" : "bottom bottom", // if it's shorter than the viewport, we prefer to pin it at the top
+                pin: true,
+                pinSpacing: false
+            });
+        });
+
+        ScrollTrigger.create({
+            snap: {
+                snapTo: (progress, self) => {
+                    let panelStarts = tops.map(st => st.start), // an Array of all the starting scroll positions. We do this on each scroll to make sure it's totally responsive. Starting positions may change when the user resizes the viewport
+                        snapScroll = gsap.utils.snap(panelStarts, self.scroll()); // find the closest one
+                    return gsap.utils.normalize(0, ScrollTrigger.maxScroll(window), snapScroll); // snapping requires a progress value, so convert the scroll position into a normalized progress value between 0 and 1
+                },
+                duration: 1000000
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
