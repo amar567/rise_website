@@ -1,0 +1,47 @@
+
+:root {
+    /* scroll-behavior: smooth; */
+}
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    text-decoration: none;
+    z-index: 0;
+    font-family: "Inter", sans-serif;
+    /* font-family: "sohne-var", "Helvetica Neue", Arial, sans-serif; */
+    /* font-family: "Montserrat", sans-serif; */
+    /* font-family: "Vollkorn", serif; */
+    /* font-optical-sizing: auto; */
+    /* font-weight: 600; */
+    font-style: normal;
+}
+
+/* glass transition */
+.glass{
+    /* background-color: rgba(255, 255, 255, 0); */
+    backdrop-filter: blur(40px);
+}
+
+body{
+    /* overflow-x: hidden; */
+}
+
+
+/* background canvas */
+
+#gradient-canvas {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: -100;
+    --gradient-color-1: #008cff;
+    --gradient-color-2: #ff00dd;
+    --gradient-color-3: #eae2ff;
+    --gradient-color-4: #b9beff;
+}
+
+@media only screen and (max-width: 600px) {
+}

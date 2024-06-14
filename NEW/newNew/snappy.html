@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal</title>
+
+    <style>
+        /* demo */
+
+
+        .intro,
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .intro {
+            background: #6e4ce1;
+            color: #f6f2e8;
+        }
+
+        footer {
+            background: #04091E;
+        }
+
+        h1 {
+            font-size: 4rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        a {
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -ms-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            display: block;
+            margin: 20px 0 0 0;
+            transition: all 0.3s ease-in-out;
+            font-size: 1.2rem;
+            color: #F6F2E8;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #6e4ce1;
+        }
+
+        /* horizontal scroll */
+
+        #horizontal-scoll {
+            padding: 200px 0;
+        }
+
+        .horizontal-scoll-wrapper {
+            overflow: hidden;
+            height: 525px;
+        }
+
+        .horizontal {
+            display: flex;
+            height: 100%;
+        }
+
+        .horizontal>div {
+            display: flex;
+            flex-shrink: 0;
+            padding: 0 5px;
+        }
+
+        .horizontal>div:first-child {
+            padding: 0 5px 0 15px;
+        }
+
+        .horizontal>div:last-child {
+            padding: 0 15px 0 5px;
+        }
+
+        .horizontal .card {
+            align-items: stretch;
+            width: 540px;
+            padding: 50px 40px;
+            background: #6e4ce1;
+            border-radius: 38px;
+            color: #f6f2e8;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- intro -->
+    <section class="intro">
+        <h1>Horizontal Scrolling Cards with GSAP</h1>
+    </section>
+    <!-- intro end -->
+    <!-- horizontal scroll -->
+    <section id="horizontal-scoll">
+        <div class="horizontal-scoll-wrapper">
+            <div class="horizontal">
+                <div>
+                    <div class="card">
+                        <h2>Card 1</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h2>Card 2</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h2>Card 3</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h2>Card 4</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h2>Card 5</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h2>Card 6</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- horizontal scroll end -->
+    <!-- footer -->
+    <footer>
+        <div>
+            <h2>Credits</h2>
+            <a href="https://www.humming.design" target="_blank">Humming</a>
+            <a href="https://greensock.com" target="_blank">GSAP</a>
+        </div>
+    </footer>
+    <!-- footer end -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        let horizontalSection = document.querySelector('.horizontal');
+
+        console.log(horizontalSection.scrollWidth);
+
+        gsap.to('.horizontal', {
+            x: () => horizontalSection.scrollWidth * -1,
+            xPercent: 100,
+            scrollTrigger: {
+                trigger: '.horizontal',
+                start: 'center center',
+                end: '+=2000px',
+                pin: '#horizontal-scoll',
+                scrub: true,
+                invalidateOnRefresh: true
+            }
+        });
+
+    </script>
+</body>
+
+</html>

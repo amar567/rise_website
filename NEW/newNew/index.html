@@ -6,266 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RISE</title>
 
-    <style>
-        :root {
-            scroll-behavior: smooth;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
 
-        * {
-            margin: 0;
-            border: 0;
-            padding: 0;
-            text-decoration: none;
-            z-index: 0;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
-        body {
-            background-color: #ffffff;
-        }
-
-        /* * {
-            font-family: "Outfit", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-        } */
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="home.css">
 
 
-        .navContainer {
-            display: flex;
-            padding: 25px 25px 25px 25px;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.74);
-            position: fixed;
-            width: -webkit-fill-available;
-            z-index: 10;
-        }
-
-        .logosContianerPhone {
-            display: none;
-        }
-
-        .logosContianerDesktop {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            flex-direction: row;
-
-        }
-
-        .logosContianerDesktop .logoImage {
-            /* height: calc(max(6vh, 50px)); */
-            height: 50px;
-        }
-
-        .separator {
-            width: 20px;
-        }
-
-        .rightNavContainer {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            flex-direction: row;
-        }
-
-        #navbar {
-            transition: top 0.3s ease;
-        }
-
-
-        .menuToggle {
-            display: block;
-            position: relative;
-            top: 50px;
-            z-index: 1;
-            -webkit-user-select: none;
-            user-select: none;
-
-            a {
-                text-decoration: none;
-                color: #232323;
-                transition: all 0.3s ease;
-
-                &:hover {
-                    color: tomato;
-                }
-            }
-
-            input {
-                display: block;
-                width: 40px;
-                height: 32px;
-                position: absolute;
-                top: -7px;
-                cursor: pointer;
-                opacity: 0;
-                /* hide this */
-                z-index: 2;
-                /* and place it over the hamburger */
-                -webkit-touch-callout: none;
-            }
-
-            span {
-                position: relative;
-                display: block;
-                width: 33px;
-                height: 4px;
-                margin-bottom: 5px;
-                position: relative;
-                background: #3a3a3a;
-                border-radius: 3px;
-                z-index: 1;
-                transform-origin: 4px 0px;
-                transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-                    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-                    opacity 0.55s ease;
-
-                &:first-child {
-                    transform-origin: 0% 0%;
-                }
-
-                &:nth-last-child(2) {
-                    transform-origin: 0% 100%;
-                }
-            }
-        }
-
-        .menuToggle {
-            input {
-                &:checked~span {
-                    opacity: 1;
-                    transform: rotate(45deg) translate(-2px, -1px);
-                    background: #000000;
-
-                    &:nth-last-child(3) {
-                        opacity: 0;
-                        transform: rotate(0deg) scale(0.2, 0.2);
-                    }
-
-                    &:nth-last-child(2) {
-                        transform: rotate(-45deg) translate(0, -1px);
-                    }
-                }
-
-                &:checked~.menuItem {
-                    transform: none;
-                }
-
-            }
-        }
-
-        .menuItem {
-            position: absolute;
-            width: 300px;
-            height: 100vh;
-            padding: 50px;
-            padding-top: 125px;
-            background: #afe8ff;
-            list-style-type: none;
-            -webkit-font-smoothing: antialiased;
-            transform-origin: 0% 0%;
-            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-
-            li {
-                padding: 10px 0;
-                font-size: 22px;
-            }
-        }
-
-
-        .menu--right {
-            .menuToggle {
-                position: absolute;
-                right: 0;
-
-                input {
-                    right: 50px;
-                }
-
-                span {
-                    right: 50px;
-                }
-            }
-
-            .menuItem {
-                right: 0;
-                margin: -100px 0 0 0;
-                transform: translate(100%, 0);
-
-                li {
-                    a {
-                        &:hover {
-                            padding-left: 5px;
-                        }
-                    }
-                }
-            }
-        }
-
-        /* background canvas */
-
-        #gradient-canvas {
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            z-index: -100;
-            --gradient-color-1: #008cff;
-            --gradient-color-2: #ff00dd;
-            --gradient-color-3: #eae2ff;
-            --gradient-color-4: #b9beff;
-        }
-
-
-
-        @keyframes text-slide-in {
-            0% {
-                -webkit-transform: translateX(100px);
-                -moz-transform: translateX(100px);
-                -ms-transform: translateX(100px);
-                -o-transform: translateX(100px);
-                transform: translateX(100px)
-            }
-
-            100% {
-                -webkit-transform: translateY(0);
-                -moz-transform: translateY(0);
-                -ms-transform: translateY(0);
-                -o-transform: translateY(0);
-                transform: translateY(0)
-            }
-        }
-
-
-        @media only screen and (max-width: 600px) {
-            .logosContianerPhone {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                flex-direction: row;
-            }
-
-            .logosContianerPhone .logoImage {
-                /* height: calc(max(6vh, 50px)); */
-                height: 50px;
-            }
-
-            .logosContianerDesktop {
-                display: none;
-            }
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
 
     <canvas id="gradient-canvas" data-transition-in></canvas>
+    <!-- <div class="glass"></div> -->
 
-
-    <div class="navContainer" id="navbar" style="top: -0px;">
+    <!-- nav section -->
+    <div class="glass navContainer" id="navbar"
+        style="top: -0px;background-color: rgba(255, 255, 255, 0.233);backdrop-filter: blur(40px);">
         <div class="leftLogoContainer">
             <div class="logosContianerPhone">
                 <img class="logoImage" src="../imgs/logos/g8.png" alt="">
@@ -292,28 +59,380 @@
                         <ul class="menuItem">
                             <li><a href="#">Home</a></li>
                             <li><a href="#">About</a></li>
-                            <li><a href="#">Info</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Startups</a></li>
+                            <li><a href="#">News & Blogs</a></li>
+                            <li><a href="#">Careers</a></li>
                             <li><a href="#">Contact</a></li>
                             <li><a href="#">Show me more</a></li>
                         </ul>
                     </div>
                 </nav>
             </header>
-
-
-
         </div>
     </div>
 
-    <div style="height:400vh">
-        <div>
-            <h1 style="position: absolute;top: 100px;;mix-blend-mode: color-burn;">asiudhuasdhuh asidjiuasjd iasjdijasid iajsdij</h1>
-            <h1 style="position: absolute;top: 100px;;color: #000000;opacity: 0.5;">asiudhuasdhuh asidjiuasjd iasjdijasid iajsdij</h1>
+    <!-- hero section -->
+    <div class="herosection">
+        <h1 class="herosectionTextBG">
+            We Fuel <b>Research <br> Startups</b> to Thrive</h1>
+        <div class="herosectionTextBlend">
+            We Fuel <b>Research <br> Startups</b> to Thrive</div>
+
+        <div id="scroll-down-animation">
+            <span class="mouse">
+                <span class="move"></span>
+            </span>
+
+            <div id="sd-container">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+            </div>
         </div>
     </div>
+
+
+
+    <h1 class="sectionHeader">
+        Transform Your Dreams into reality at RISE Foundation IISER
+    </h1>
+    <div id="horizontal-scoll" >
+        <!-- horizontal scroll -->
+
+        <div class="horizontal-scoll-wrapper">
+            <div class="horizontal">
+                <div>
+                    <div class="card glass">
+                        <h2>Total Area - 20,000 sq ft</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>IT Space and Library</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Fabrication Lab with Clean Room</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Microbial Culture Facility</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Animal Cell Culture Facility</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Plant Tissue Culture Facility</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Optics and Photonics Facility with Dark Room</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Chemical Technology Facility</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Shared Services</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <h2>Access to IISER-Kolkata Facilities</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- moving carousel -->
+
+    <!-- Heading -->
+    <h1 class="" style="width:100%;text-align: center;mix-blend-mode: color-burn;font-size: 4rem;padding: 100px 0 50px 0;">Our
+        Incubatees</h1>
+    <!-- rc-carousel wrapper, set total tiles count including duplicate items -->
+    <div class="rc-carousel" style="--tiles: 18;">
+        <!-- rc-carousel-strip animation -->
+        <div class="rc-carousel-strip">
+            <!-- Flexbox -->
+            <div class="rc-carousel-box">
+                <!-- Items start -->
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/df6a77389d/dhl-with-white-bg.svg" alt="dhl" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b3ddb46ffd/fedex.svg"
+                        alt="fedex" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/13b7cfbff0/ups.svg"
+                        alt="ups" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/bed370f7c7/upsp.svg"
+                        alt="upsp" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/3d19ae9058/ems.svg"
+                        alt="ems" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/0a2ea7112b/dpd.svg"
+                        alt="dpd" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/fe62ffeb3c/gls.svg"
+                        alt="gls" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/863af19f44/auspost.svg"
+                        alt="auspost" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b546bbfc89/dsv.svg"
+                        alt="dsv" />
+                </div>
+                <!-- Items end -->
+
+                <!-- Duplicate items start, for infinite loop -->
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/df6a77389d/dhl-with-white-bg.svg" alt="dhl" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b3ddb46ffd/fedex.svg"
+                        alt="fedex" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/13b7cfbff0/ups.svg"
+                        alt="ups" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/bed370f7c7/upsp.svg"
+                        alt="upsp" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/3d19ae9058/ems.svg"
+                        alt="ems" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/0a2ea7112b/dpd.svg"
+                        alt="dpd" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/fe62ffeb3c/gls.svg"
+                        alt="gls" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/863af19f44/auspost.svg"
+                        alt="auspost" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b546bbfc89/dsv.svg"
+                        alt="dsv" />
+                </div>
+                <!-- Duplicate items end -->
+            </div>
+            <!-- Flexbox ends -->
+        </div>
+        <!-- rc-carousel-strip ends -->
+    </div>
+    <!-- rc-carousel wrapper ends -->
+
+    <!-- rc-carousel wrapper, set total tiles count including duplicate items -->
+    <div class="rc-carousel" style="--tiles: 18">
+        <!-- rc-carousel-strip animation -->
+        <div class="rc-carousel-strip reverse">
+            <!-- Flexbox -->
+            <div class="rc-carousel-box">
+                <!-- Items start -->
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/82b708d5db/shopify.svg"
+                        alt="shopify" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/b75563ee5a/shopify-plus.svg" alt="shopify plus" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/c07c101b92/woocommerce.svg" alt="woocommerce" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/8a1255c93e/bigcommerce.svg" alt="bigcommerce" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/7959054e28/salesforce.svg" alt="salesforce" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/a6a0e2c3a1/magento.svg"
+                        alt="magento" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/ab24f45c43/squarespace.svg" alt="squarespace" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/792acd8fce/ebay.svg"
+                        alt="ebay" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/6be94a6145/amazon.svg"
+                        alt="amazon" />
+                </div>
+                <!-- Items end -->
+                <!-- Duplicate items start, for infinite loop -->
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/82b708d5db/shopify.svg"
+                        alt="shopify" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/b75563ee5a/shopify-plus.svg" alt="shopify plus" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/c07c101b92/woocommerce.svg" alt="woocommerce" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/8a1255c93e/bigcommerce.svg" alt="bigcommerce" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/7959054e28/salesforce.svg" alt="salesforce" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/a6a0e2c3a1/magento.svg"
+                        alt="magento" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/ab24f45c43/squarespace.svg" alt="squarespace" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/792acd8fce/ebay.svg"
+                        alt="ebay" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/6be94a6145/amazon.svg"
+                        alt="amazon" />
+                </div>
+                <!-- Duplicate items end -->
+            </div>
+            <!-- Flexbox ends -->
+        </div>
+        <!-- rc-carousel-strip ends -->
+    </div>
+    <!-- rc-carousel wrapper ends -->
+
+    <!-- rc-carousel wrapper, set total tiles count including duplicate items -->
+    <div class="rc-carousel" style="--tiles: 18;">
+        <!-- rc-carousel-strip animation -->
+        <div class="rc-carousel-strip">
+            <!-- Flexbox -->
+            <div class="rc-carousel-box">
+                <!-- Items start -->
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/df6a77389d/dhl-with-white-bg.svg" alt="dhl" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b3ddb46ffd/fedex.svg"
+                        alt="fedex" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/13b7cfbff0/ups.svg"
+                        alt="ups" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/bed370f7c7/upsp.svg"
+                        alt="upsp" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/3d19ae9058/ems.svg"
+                        alt="ems" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/0a2ea7112b/dpd.svg"
+                        alt="dpd" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/fe62ffeb3c/gls.svg"
+                        alt="gls" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/863af19f44/auspost.svg"
+                        alt="auspost" />
+                </div>
+                <div class="rc-carousel-item glass">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b546bbfc89/dsv.svg"
+                        alt="dsv" />
+                </div>
+                <!-- Items end -->
+
+                <!-- Duplicate items start, for infinite loop -->
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image"
+                        src="https://a.storyblok.com/f/79434/x/df6a77389d/dhl-with-white-bg.svg" alt="dhl" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b3ddb46ffd/fedex.svg"
+                        alt="fedex" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/13b7cfbff0/ups.svg"
+                        alt="ups" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/bed370f7c7/upsp.svg"
+                        alt="upsp" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/3d19ae9058/ems.svg"
+                        alt="ems" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/0a2ea7112b/dpd.svg"
+                        alt="dpd" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/fe62ffeb3c/gls.svg"
+                        alt="gls" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/863af19f44/auspost.svg"
+                        alt="auspost" />
+                </div>
+                <div class="rc-carousel-item glass" aria-hidden="true">
+                    <img class="rc-carousel-item-image" src="https://a.storyblok.com/f/79434/x/b546bbfc89/dsv.svg"
+                        alt="dsv" />
+                </div>
+                <!-- Duplicate items end -->
+            </div>
+            <!-- Flexbox ends -->
+        </div>
+        <!-- rc-carousel-strip ends -->
+    </div>
+    <!-- rc-carousel wrapper ends -->
 
     <script src="./bg.js"></script>
     <script src="./navbar.js"></script>
+    <script src="./gsap.js"></script>
 </body>
 
 </html>
