@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
             scrollTrigger: {
                 trigger: '.horizontal',
                 start: 'center center',
-                end: '+=2000px',
+                end: '+=800px',
                 pin: '#horizontal-scoll',
                 scrub: true,
                 invalidateOnRefresh: true

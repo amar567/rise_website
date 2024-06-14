@@ -18,16 +18,6 @@
     font-style: normal;
 }
 
-/* glass transition */
-.glass{
-    /* background-color: rgba(255, 255, 255, 0); */
-    backdrop-filter: blur(40px);
-}
-
-body{
-    /* overflow-x: hidden; */
-}
-
 
 /* background canvas */
 
@@ -37,10 +27,14 @@ body{
     position: fixed;
     top: 0;
     z-index: -100;
-    --gradient-color-1: #008cff;
-    --gradient-color-2: #ff00dd;
+    --gradient-color-1: #74c0ff;
+    --gradient-color-2: #ffa6f3;
     --gradient-color-3: #eae2ff;
     --gradient-color-4: #b9beff;
+}
+
+.glass{
+    backdrop-filter: blur(20px)
 }
 
 @media only screen and (max-width: 600px) {
