@@ -1,0 +1,53 @@
+svg .draw-logo {
+    /* stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 10;
+    stroke: rgba(0, 0, 0, 0);
+    fill: rgba(0, 0, 0, 0);
+    animation-duration: 4s;
+    animation-delay: 1s;
+    animation-timing-function: cubic-bezier(1, .02, 1, .56);
+    animation-fill-mode: forwards;
+    animation-name: draw-logo; */
+}
+
+svg .draw-logo{
+    /* stroke-linecap: round; */
+    stroke-linejoin: round;
+    stroke-width: 10;
+    stroke: rgba(0, 0, 0, 0);
+    fill: rgba(0, 0, 0, 0);
+    animation-duration: 2s;
+    /* animation-delay: 1s; */
+    animation-timing-function: cubic-bezier(1, .02, 1, .56);
+    animation-fill-mode: forwards;
+    animation-name: draw-logo;
+}
+
+@keyframes draw-logo {
+    0% {
+      stroke-width: 3;
+      stroke:  rgba(0,0,0,1);
+      fill: rgba(0,0,0,0);
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      }
+    5%{
+      /* stroke: #119a7b; */
+      }
+      30%{
+      stroke-width:7;
+      }
+    70% {
+      fill: rgba(0,0,0,0);
+      stroke-dasharray: 5000;
+      stroke-dashoffset: 50;
+      stroke-width: 9;
+      }
+    100% {
+      stroke-width: 9;
+      /* stroke: #119a7b; */
+      fill: rgba(0,0,0,1);
+      }
+    }
+    
