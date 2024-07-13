@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/nav.css">
+
+    <!-- page specific -->
+    <link rel="stylesheet" href="/incubatee_info/incubateePg.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <script>
+        const req_options = { method: 'GET', headers: {} };
+
+        viewID = '60721049-cff0-4b13-bc7b-beafdb822735'
+
+
+        fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID + '/rows?l=1000', req_options)
+            .then(response => response.json())
+            .then(response => {
+
+                data = response.list
+
+                const groupedData = data.reduce((acc, item) => {
+                    if (!acc[item.Category]) {
+                        acc[item.Category] = [];
+                    }
+                    // Push the current item to the array for this Category
+                    acc[item.Category].push(item);
+                    return acc;
+                }, {});
+
+                // Print the grouped data
+
+                Startups = document.getElementById('incubatees_dropdown')
+
+                for (const key in groupedData) {
+                    dropdownParent = document.createElement('details')
+                    dropdownParent.id = key
+                    category = document.createElement('summary')
+                    category.innerHTML = "<li>" + key + "</li>"
+                    dropdownParent.appendChild(category)
+                    if (Object.hasOwnProperty.call(groupedData, key)) {
+                        const element = groupedData[key];
+
+                        element.forEach(incubateeData => {
+
+                            dropdown = document.createElement('a')
+                            dropdown.id = key
+                            dropdown.href = "/incubatee_info/?id=" + incubateeData["Id"]
+
+                            dropdown_name = document.createElement('li')
+                            dropdown.classList.add("li_hover")
+                            dropdown_name.innerHTML = incubateeData["Name of Incubatee"]
+
+                            dropdown.appendChild(dropdown_name)
+
+                            dropdownParent.appendChild(dropdown)
+                        });
+                    }
+                    Startups.appendChild(dropdownParent)
+                }
+            })
+
+    </script>
+</head>
+
+<body>
+
+    <canvas id="gradient-canvas" data-transition-in></canvas>
+    <!-- <div class="glass"></div> -->
+
+    <!-- nav section -->
+    <div class="glass navContainer" id="navbar"
+        style="top: -0px;background-color: rgba(255, 255, 255, 0.233);backdrop-filter: blur(40px);">
+        <div class="leftLogoContainer">
+            <div class="logosContianerPhone">
+                <img class="logoImage" src="/imgs/logos/g8.png" alt="">
+            </div>
+            <div class="logosContianerDesktop">
+                <img class="logoImage" src="/imgs/logos/g8.png" alt="">
+                <div class="separator"></div>
+                <img class="logoImage" src="/imgs/logos/Group 1.png" alt="">
+                <div class="separator"></div>
+                <img class="logoImage" src="/imgs/logos/g1461.png" alt="">
+                <div class="separator"></div>
+                <img class="logoImage" src="/imgs/logos/DST NIDHI_Original Logo-V 1.png" alt="">
+
+            </div>
+        </div>
+        <div class="rightNavContainer">
+            <header>
+                <nav class="menu--right" role="navigation">
+                    <div class="menuToggle">
+                        <input type="checkbox" />
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <ul class="menuItem glass">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li style="left: -10px;position: relative;">
+                                <details id="incubatees_dropdown">
+                                    <summary class="dropbtn">
+                                        Startups
+                                    </summary>
+                                </details>
+                            </li>
+                            <li><a href="#">News & Blogs</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Show me more</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    
+    <script src="/bg.js"></script>
+    <script src="/navbar.js"></script>
+
+    <!-- page specific -->
+     
+</body>
+
+</html>

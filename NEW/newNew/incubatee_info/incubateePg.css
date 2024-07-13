@@ -1,0 +1,69 @@
+.image-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    /* outline: 1px solid red; */
+}
+
+.container {
+    /* outline: 1px solid; */
+    /* width: 400px; */
+    display: flex;
+}
+
+.left-arrow,
+.right-arrow {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    flex: 1;
+    /* outline: 1px solid; */
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: rgb(0, 0, 0);
+    margin: 10px;
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+    color: white;
+}
+
+.dots {
+    justify-content: center;
+    width: 100%;
+    /* outline: 1px solid; */
+    display: flex;
+    gap: 1em;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 50%;
+    transition: .5s ease-in-out;
+}
+
+.dot.selected {
+    background-color: white;
+}
+
+.img-container {
+    display: flex;
+    height: 400px;
+    width: 600px;
+    max-width: 80vw;
+    max-height: 60vw;
+    /* border: 5px solid white; */
+    overflow-x: hidden;
+}
+
+.img-container img {
+    flex: 1 0 100%;
+    object-fit: cover;
+}
+
+.hidden-img {
+    display: none;
+}

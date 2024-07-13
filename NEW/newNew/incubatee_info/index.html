@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/nav.css">
+
+    <!-- page specific -->
+    <link rel="stylesheet" href="/incubatee_info/incubateePg.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <script>
+        const req_options = { method: 'GET', headers: {} };
+
+        viewID = '60721049-cff0-4b13-bc7b-beafdb822735'
+
+
+        fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID + '/rows?l=1000', req_options)
+            .then(response => response.json())
+            .then(response => {
+
+                data = response.list
+
+                const groupedData = data.reduce((acc, item) => {
+                    if (!acc[item.Category]) {
+                        acc[item.Category] = [];
+                    }
+                    // Push the current item to the array for this Category
+                    acc[item.Category].push(item);
+                    return acc;
+                }, {});
+
+                // Print the grouped data
+
+                Startups = document.getElementById('incubatees_dropdown')
+
+                for (const key in groupedData) {
+                    dropdownParent = document.createElement('details')
+                    dropdownParent.id = key
+                    category = document.createElement('summary')
+                    category.innerHTML = "<li>" + key + "</li>"
+                    dropdownParent.appendChild(category)
+                    if (Object.hasOwnProperty.call(groupedData, key)) {
+                        const element = groupedData[key];
+
+                        element.forEach(incubateeData => {
+
+                            dropdown = document.createElement('a')
+                            dropdown.id = key
+                            dropdown.href = "/incubatee_info/?id=" + incubateeData["Id"]
+
+                            dropdown_name = document.createElement('li')
+                            dropdown.classList.add("li_hover")
+                            dropdown_name.innerHTML = incubateeData["Name of Incubatee"]
+
+                            dropdown.appendChild(dropdown_name)
+
+                            dropdownParent.appendChild(dropdown)
+                        });
+                    }
+                    Startups.appendChild(dropdownParent)
+                }
+            })
+
+    </script>
+</head>
+
+<body>
+
+    <canvas id="gradient-canvas" data-transition-in></canvas>
+    <!-- <div class="glass"></div> -->
+
+    <!-- nav section -->
+    <div class="glass navContainer" id="navbar"
+        style="top: -0px;background-color: rgba(255, 255, 255, 0.233);backdrop-filter: blur(40px);">
+        <div class="leftLogoContainer">
+            <div class="logosContianerPhone">
+                <img class="logoImage" src="/imgs/logos/g8.png" alt="">
+            </div>
+            <div class="logosContianerDesktop">
+                <img class="logoImage" src="/imgs/logos/g8.png" alt="">
+                <div class="separator"></div>
+                <img class="logoImage" src="/imgs/logos/Group 1.png" alt="">
+                <div class="separator"></div>
+                <img class="logoImage" src="/imgs/logos/g1461.png" alt="">
+                <div class="separator"></div>
+                <img class="logoImage" src="/imgs/logos/DST NIDHI_Original Logo-V 1.png" alt="">
+
+            </div>
+        </div>
+        <div class="rightNavContainer">
+            <header>
+                <nav class="menu--right" role="navigation">
+                    <div class="menuToggle">
+                        <input type="checkbox" />
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <ul class="menuItem glass">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li style="left: -10px;position: relative;">
+                                <details id="incubatees_dropdown">
+                                    <summary class="dropbtn">
+                                        Startups
+                                    </summary>
+                                </details>
+                            </li>
+                            <li><a href="#">News & Blogs</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Show me more</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+    <div id="test_div"
+        style="display: flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 100px;">
+        <h1 class="sectionHeader" id="incubateeName"></h1>
+
+        <div style="display: flex;flex-direction: row;justify-content: space-around;align-items: stretch;flex-wrap: wrap;">
+            <div class="image-carousel">
+                <div class="container">
+                    <div class="left-arrow">&lt; </div>
+                    <div class="img-container" id="carousel">
+                    </div>
+                    <div class="right-arrow">&gt</div>
+                </div>
+                <div class="dots">
+                </div>
+            </div>
+    
+            <p id="incubateeDescription" style="text-align: justify;font-size: 1.3rem;padding: 40px;max-width: 500px;width: max(50%,90vw);"></p>
+        </div>
+        
+    </div>
+
+
+    <script src="/bg.js"></script>
+    <script src="/navbar.js"></script>
+
+    <!-- page specific -->
+    <!-- <script src="/incubatee_info/incubateePg.js"></script> -->
+
+    <script>
+        const urlParams = new URLSearchParams(document.location.search);
+
+        // Get a specific parameter
+        const rowId = urlParams.get("id");
+
+        // console.log(rowId);
+
+        const new_req_options = { method: 'GET', headers: {} };
+
+        // viewID = '6eff141d-bae0-4f2f-9471-e276dde4c10f'
+        viewID = '60721049-cff0-4b13-bc7b-beafdb822735'
+        // baseID = '0d3521c9-73ce-4646-9b56-8949465748e5'
+
+        // fetch('https://app.nocodb.com/api/v1/db/public/shared-base/' + baseID + '/rows', new_req_options)
+        //     .then(response => response.json())
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID + '/rows', req_options)
+            .then(response => response.json())
+            .then(response => {
+                // console.log(response);
+                data = response.list
+                const filteredData = data.filter(item => item.Id == rowId);
+
+                console.log(filteredData[0]);
+
+                document.getElementById("incubateeName").innerHTML = filteredData[0]["Name of Incubatee"]
+
+                document.getElementById("incubateeDescription").innerHTML = filteredData[0]["Description"]
+
+                filteredData[0]["Pics"].forEach(element => {
+
+                    console.log(element.signedUrl);
+
+                    img = document.createElement('img')
+                    img.src = element.signedUrl
+                    document.getElementById("carousel").appendChild(img)
+                });
+
+                const ImgElements = document.querySelectorAll('.image-carousel img');
+                const imgCount = ImgElements.length;
+                const nextBtn = document.querySelector('.image-carousel .right-arrow');
+                const prevBtn = document.querySelector('.image-carousel .left-arrow');
+                let currentImg, currentDot;
+                let imgIndex;
+                const dotContainer = document.querySelector('.image-carousel .dots');
+
+                function initialiseCarousel() {
+                    //make all images except the first one hidden
+                    ImgElements.forEach(element => {
+                        element.classList.add('hidden-img');
+                    });
+                    currentImg = ImgElements[0];
+                    imgIndex = 0;
+                    currentImg.classList.remove('hidden-img');
+
+                    //create dots and select only the first one
+                    for (let i = 0; i < imgCount; i++) {
+                        let dot = document.createElement('div');
+                        dot.classList.add('dot');
+                        dot.setAttribute('data-index', i);
+                        dotContainer.appendChild(dot);
+                    }
+                    currentDot = dotContainer.querySelector('.dot');
+                    currentDot.classList.add('selected');
+                }
+                initialiseCarousel();
+
+                const allDots = dotContainer.querySelectorAll('.dot');
+
+                function updateImg() {
+                    currentImg.classList.add('hidden-img');
+                    currentImg = ImgElements[imgIndex];
+                    currentImg.classList.remove('hidden-img');
+                }
+                function updateDot() {
+                    currentDot.classList.remove('selected');
+                    currentDot = allDots[imgIndex];
+                    currentDot.classList.add('selected');
+                }
+
+                function changeToRightImage(moveRight = true) {
+                    if (moveRight) {
+                        imgIndex = (imgIndex + 1) % imgCount;
+                    } else {
+                        imgIndex--;
+                        if (imgIndex < 0) {
+                            imgIndex += imgCount;
+                        }
+                    }
+
+                    updateImg();
+                    updateDot();
+                }
+
+                nextBtn.addEventListener('click', e => {
+                    e.preventDefault();
+                    changeToRightImage();
+
+                });
+
+                prevBtn.addEventListener('click', e => {
+                    e.preventDefault();
+                    changeToRightImage(false);
+
+                })
+
+                allDots.forEach(dot => {
+                    dot.addEventListener('click', e => {
+                        let dotIndex = 0;
+                        let dotElement = e.target;
+                        while (!dotElement.isEqualNode(allDots[dotIndex])) {
+                            dotIndex++;
+                        }
+                        console.log(dotIndex);
+                        imgIndex = dotIndex;
+                        updateImg();
+                        updateDot();
+                    });
+                });
+
+                setInterval(changeToRightImage, 5000);
+
+            })
+
+    </script>
+</body>
+
+</html>

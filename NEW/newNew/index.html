@@ -24,6 +24,89 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <script>
+        const req_options = { method: 'GET', headers: {} };
+
+        viewID = '96a1aa81-cad6-4ffd-b677-7e71fc455793'
+        // baseID = '77babce2-f1f3-45e6-8a4d-c9e818fc903b'
+
+        // fetch('https://app.nocodb.com/api/v1/db/public/shared-base/' + baseID + '/meta', req_options)
+        //     .then(response => response.json())
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        // fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID + '/meta', req_options)
+        //     .then(response => response.json())
+        //     .then(response => {
+        //         // console.log(response)
+        //         optionJson = response.model.columnsById.cfps0hldq08etv3.colOptions.options
+
+        //         Incubatee_categories = []
+
+        //         optionJson.forEach(element => {
+        //             Incubatee_categories.push(element.title)
+        //         });
+
+
+
+        //     })
+
+        fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID + '/rows?l=1000', req_options)
+            .then(response => response.json())
+            .then(response => {
+
+                // console.log('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID + '/rows');
+                // console.log(response);
+
+                data = response.list
+
+                const groupedData = data.reduce((acc, item) => {
+                    if (!acc[item.Category]) {
+                        acc[item.Category] = [];
+                    }
+                    // Push the current item to the array for this Category
+                    acc[item.Category].push(item);
+                    return acc;
+                }, {});
+
+                // Print the grouped data
+                // console.log(Object.keys(groupedData));
+                
+                Startups = document.getElementById('incubatees_dropdown')
+
+                for (const key in groupedData) {
+                    dropdownParent = document.createElement('details')
+                    dropdownParent.id = key
+                    category = document.createElement('summary')
+                    category.innerHTML = "<li>"+key+"</li>"
+                    dropdownParent.appendChild(category)
+                    console.log(key);
+                    if (Object.hasOwnProperty.call(groupedData, key)) {
+                        const element = groupedData[key];
+                        
+                        element.forEach(incubateeData => {
+                            
+                            dropdown = document.createElement('a')
+                            dropdown.id = key
+                            dropdown.href = "/incubatee_info/?id=" + incubateeData["Id"]
+                            
+                            dropdown_name = document.createElement('li')
+                            dropdown.classList.add("li_hover")
+                            dropdown_name.innerHTML = incubateeData["Name of Incubatee"]
+
+                            dropdown.appendChild(dropdown_name)
+
+                            console.log(incubateeData["Name of Incubatee"]);
+
+                            dropdownParent.appendChild(dropdown)
+                        });
+                    }
+                    Startups.appendChild(dropdownParent)
+                }
+            })
+
+    </script>
 </head>
 
 <body>
@@ -36,16 +119,16 @@
         style="top: -0px;background-color: rgba(255, 255, 255, 0.233);backdrop-filter: blur(40px);">
         <div class="leftLogoContainer">
             <div class="logosContianerPhone">
-                <img class="logoImage" src="../imgs/logos/g8.png" alt="">
+                <img class="logoImage" src="/imgs/logos/g8.png" alt="">
             </div>
             <div class="logosContianerDesktop">
-                <img class="logoImage" src="../imgs/logos/g8.png" alt="">
+                <img class="logoImage" src="/imgs/logos/g8.png" alt="">
                 <div class="separator"></div>
-                <img class="logoImage" src="../imgs/logos/Group 1.png" alt="">
+                <img class="logoImage" src="/imgs/logos/Group 1.png" alt="">
                 <div class="separator"></div>
-                <img class="logoImage" src="../imgs/logos/g1461.png" alt="">
+                <img class="logoImage" src="/imgs/logos/g1461.png" alt="">
                 <div class="separator"></div>
-                <img class="logoImage" src="../imgs/logos/DST NIDHI_Original Logo-V 1.png" alt="">
+                <img class="logoImage" src="/imgs/logos/DST NIDHI_Original Logo-V 1.png" alt="">
 
             </div>
         </div>
@@ -58,10 +141,16 @@
                         <span></span>
                         <span></span>
                         <ul class="menuItem glass">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about">About</a></li>
                             <li><a href="#">Services</a></li>
-                            <li><a href="#">Startups</a></li>
+                            <li style="left: -10px;position: relative;">
+                                <details id="incubatees_dropdown">
+                                    <summary class="dropbtn">
+                                        Startups
+                                    </summary>
+                                </details>
+                            </li>
                             <li><a href="#">News & Blogs</a></li>
                             <li><a href="#">Careers</a></li>
                             <li><a href="#">Contact</a></li>
@@ -133,73 +222,90 @@
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/bg.jpg" class="highlightImage" alt="">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Total Area - 20,000 sq ft</h2>
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Total Area - 20,000 sq
+                            ft</h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/Meeting Room.jpg" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">IT Space and Library</h2>
-                    </div>
-                </div>
-                <div>
-                    <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
-                            <img src="./highlights/Fab Lab 2.jpg" alt="" class="highlightImage">
-                        </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Fabrication Lab with Clean Room
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">IT Space and Library
                         </h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
-                            <img src="./highlights/Bio Lab1.JPG" alt="" class="highlightImage">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                            <img src="./highlights/Fab Lab 2.jpg" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Microbial Culture Facility</h2>
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Fabrication Lab with
+                            Clean Room
+                        </h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                            <img src="./highlights/Bio Lab1.JPG" alt="" class="highlightImage">
+                        </div>
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Microbial Culture
+                            Facility</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="card glass">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/Animal Cell Culture Room_1.JPG" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Animal Cell Culture Facility</h2>
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Animal Cell Culture
+                            Facility</h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/Bio Lab1.JPG" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Plant Tissue Culture Facility</h2>
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Plant Tissue Culture
+                            Facility</h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/Bio Lab1.JPG" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Optics and Photonics Facility with
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Optics and Photonics
+                            Facility with
                             Dark Room</h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/Bio Lab1.JPG" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Chemical Technology Facility</h2>
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Chemical Technology
+                            Facility</h2>
                     </div>
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/scxrd-bruker.jpg" alt="" class="highlightImage">
                         </div>
                         <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Shared Services</h2>
@@ -207,10 +313,12 @@
                 </div>
                 <div>
                     <div class="card glass">
-                        <div style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                        <div
+                            style="height: 70%;width: inherit;display: flex;flex-direction: row;align-items: center;justify-content: center;">
                             <img src="./highlights/scxrd-bruker.jpg" alt="" class="highlightImage">
                         </div>
-                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Access to IISER-Kolkata Facilities
+                        <h2 style="height:30%;text-align: center;padding-top: 20px;color:black;">Access to IISER-Kolkata
+                            Facilities
                         </h2>
                     </div>
                 </div>
