@@ -18,7 +18,8 @@ const options = { method: 'GET', headers: {} };
 // // https://wdy3gn5h.nocodb.com/#/nc/view/6eff141d-bae0-4f2f-9471-e276dde4c10f
 // https://wdy3gn5h.nocodb.com/#/base/77babce2-f1f3-45e6-8a4d-c9e818fc903b
 
-tableID = '96a1aa81-cad6-4ffd-b677-7e71fc455793'
+tableID = '60721049-cff0-4b13-bc7b-beafdb822735'
+// tableID = '96a1aa81-cad6-4ffd-b677-7e71fc455793'
 
 fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + tableID + '/rows', options)
     .then(response => response.json())
