@@ -26,10 +26,10 @@
     position: fixed;
     top: 0;
     z-index: -100;
-    --gradient-color-1: #74c0ff;
-    --gradient-color-2: #ffa6f3;
-    --gradient-color-3: #eae2ff;
-    --gradient-color-4: #b9beff;
+    --gradient-color-1: #67b9d9;
+    --gradient-color-2: #8ccee8;
+    --gradient-color-3: #aedef1;
+    --gradient-color-4: #ebf9ff;
 }
 
 .glass {
