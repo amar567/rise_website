@@ -1,0 +1,256 @@
+.circle {
+    height: 130px;
+    width: 130px;
+    border-radius: 200px;
+    background-color: #75c1ff;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.circle1div {
+    position: absolute;
+}
+
+.circle2div {
+    position: absolute;
+}
+
+.circle3div {
+    position: absolute;
+}
+
+.circle4div {
+    position: absolute;
+}
+
+.circle5div {
+    position: absolute;
+}
+
+.circle6div {
+    position: absolute;
+}
+
+.circle7div {
+    position: absolute;
+}
+
+.circle8div {
+    position: absolute;
+}
+
+.circle9div {
+    position: absolute;
+}
+
+.circle10div {
+    position: absolute;
+}
+
+
+.centered {
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+}
+
+.orbit {
+    border-radius: 50%;
+    position: absolute;
+    border: 2px solid #f8f8f8;
+    box-sizing: border-box;
+}
+
+.orbit0 {
+    width: 700px;
+    height: 700px;
+}
+
+.orbit1 {
+    width: 400px;
+    height: 400px;
+}
+
+.ourFocusPhone {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: inherit;
+}
+
+.left {
+    width: calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.right {
+    width: calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.panel {
+    height: 60px;
+    width: 80%;
+    background-color: rgb(0, 229, 255);
+    color: rgb(0, 0, 0);
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 20px;
+    border: rgb(75, 237, 255) 2px solid;
+    padding: 10px;
+}
+
+.ourFocusPhone {
+    display: none;
+}
+
+.ourFocusDesk {
+    display: grid;
+}
+
+
+
+.footerContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: rgb(2, 0, 8);
+    min-height: 50vh;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 40px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    /* background-color: rgb(27, 0, 109); */
+    width: 70%;
+}
+
+.footerColFat {
+    width: 30%;
+    min-width: 165px;
+}
+
+.footerColThin {
+    width: 15%;
+    min-width: 165px;
+}
+
+.footerColHeading {
+    color: white;
+    text-decoration: underline 1px white;
+    line-height: 3rem;
+    font-weight: 800;
+
+}
+
+.footerCol {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+
+.FooterLink>a {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: inherit;
+}
+
+a>li {
+    width: inherit;
+    line-height: 2rem;
+}
+
+@media (max-width: 750px) {
+    .ourFocusDesk {
+        display: none;
+    }
+
+    .ourFocusPhone {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer {
+        width: 90%;
+    }
+
+    .footerColFat {
+        width: 100%;
+    }
+
+    .footerColThin {
+        width: 100%;
+    }
+
+    .footerCol {
+        align-content: center;
+    }
+
+    .footerColHeading {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        width: inherit;
+        font-weight: 800;
+    }
+
+    .footerColList {
+        width: inherit;
+    }
+
+    .FooterLink {
+        width: inherit;
+    }
+
+    .FooterLink>a {
+        text-decoration: none;
+        color: inherit;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        width: inherit;
+    }
+
+    a>li {
+        width: inherit;
+        line-height: 2rem;
+        list-style-type: none;
+    }
+}
+
+/* ------------------------------------- */

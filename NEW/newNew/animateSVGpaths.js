@@ -1,36 +1,39 @@
 // credit : https://codepen.io/kezo777/pen/qBbbVmN?editors=1100
 
-pathsList = document.getElementsByTagName('path')
+pathsList = document.getElementsByClassName('path')
 
-container = document.getElementById('ourServicesContainer')
-// console.log(container.isIntersecting)
 
-const iObserver = new IntersectionObserver(items => {
+let options0 = {
+    // root: document.querySelector("#scrollArea"),
+    // rootMargin: "0px",
+    // threshold: 1.0,
+};
 
-    // Intersecting? (is the element in the available viewport)
-    if (items[0].isIntersecting) {
-        // Log visibility
-        // console.log('Visible? Yes');
-        // pathsList.forEach(path => {
-        //     path.className = 'draw-logo'
-        // });
-        for (const path of pathsList) {
-            path.classList.add('draw-logo')
-            // console.log({path});
-        }
-        // console.log(pathsList);
+let callback = (entries, observer) => {
+
+    // console.log(entries);
+    entries.forEach((entry) => {
+        // Each entry describes an intersection change for one observed
         
-    } else {
-        // console.log('Visible? No')
-        for (const path of pathsList) {
-            path.classList.remove('draw-logo')
-            // console.log({path});
+        if (entry.isIntersecting) {
+            entry.target.classList.add('draw-logo')
+        } else {
+            entry.target.classList.remove('draw-logo')
         }
-        visiblity = 'invisible';
-        statusText = 'Nothing is visible, scroll!';
-    }
 
-});
+        // target element:
+        //   entry.boundingClientRect
+        //   entry.intersectionRatio
+        //   entry.intersectionRect
+        // console.log(entry.isIntersecting);
+        //   entry.rootBounds
+        //   entry.target
+        //   entry.time
+    });
+};
 
-// Loop through and observe intersect items
-iObserver.observe(container)
+let observer = new IntersectionObserver(callback,options0);
+
+for(item of pathsList){
+    observer.observe(item)
+}

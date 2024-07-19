@@ -17,6 +17,9 @@
     font-style: normal;
 }
 
+body{
+    overflow-x: hidden;
+}
 
 /* background canvas */
 
@@ -26,11 +29,24 @@
     position: fixed;
     top: 0;
     z-index: -100;
-    --gradient-color-1: #67b9d9;
+    --gradient-color-4: #15015f;
+    --gradient-color-1: #005F87;
+    --gradient-color-3: #77C5E6;
+    --gradient-color-2: #ebf9ff;
+    /* --gradient-color-1: #67b9d9;
     --gradient-color-2: #8ccee8;
     --gradient-color-3: #aedef1;
-    --gradient-color-4: #ebf9ff;
+    --gradient-color-4: #ebf9ff; */
 }
+
+/* colors from brochure */
+/* 
+    0B0031 -- dark blue
+    005F87 -- lighter blue
+    77C5E6 -- light blue
+    F4F5FC -- blue - white
+    FFFFFF -- white
+*/
 
 .glass {
     backdrop-filter: blur(20px)
