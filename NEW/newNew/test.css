@@ -123,74 +123,6 @@
     display: grid;
 }
 
-
-
-.footerContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: rgb(2, 0, 8);
-    min-height: 50vh;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-top: 40px;
-}
-
-.footer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    /* background-color: rgb(27, 0, 109); */
-    width: 70%;
-}
-
-.footerColFat {
-    width: 30%;
-    min-width: 165px;
-}
-
-.footerColThin {
-    width: 15%;
-    min-width: 165px;
-}
-
-.footerColHeading {
-    color: white;
-    text-decoration: underline 1px white;
-    line-height: 3rem;
-    font-weight: 800;
-
-}
-
-.footerCol {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-
-.FooterLink>a {
-    text-decoration: none;
-    color: inherit;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    width: inherit;
-}
-
-a>li {
-    width: inherit;
-    line-height: 2rem;
-}
-
 @media (max-width: 750px) {
     .ourFocusDesk {
         display: none;
@@ -199,57 +131,6 @@ a>li {
     .ourFocusPhone {
         display: flex;
         justify-content: center;
-    }
-
-    .footer {
-        width: 90%;
-    }
-
-    .footerColFat {
-        width: 100%;
-    }
-
-    .footerColThin {
-        width: 100%;
-    }
-
-    .footerCol {
-        align-content: center;
-    }
-
-    .footerColHeading {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-        width: inherit;
-        font-weight: 800;
-    }
-
-    .footerColList {
-        width: inherit;
-    }
-
-    .FooterLink {
-        width: inherit;
-    }
-
-    .FooterLink>a {
-        text-decoration: none;
-        color: inherit;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-        width: inherit;
-    }
-
-    a>li {
-        width: inherit;
-        line-height: 2rem;
-        list-style-type: none;
     }
 }
 

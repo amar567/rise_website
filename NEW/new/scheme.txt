@@ -18,3 +18,5 @@ Trailer section
 		
 	Become a patron
 	
+	
+announcements: time based announcement section

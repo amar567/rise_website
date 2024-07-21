@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/careers/careers.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
@@ -196,9 +196,44 @@
 
 
     <!-- Heading -->
-    <h1 class="sectionHeader">About Us</h1>
+    <h1 class="sectionHeader">Careers at RISE Foundation</h1>
+    <h1 class="sectionHeader" style="text-align: left;font-size: 2.4rem;">Openings</h1>
+
+    <div id="openings">
+
+    </div>
+
+    <h1 class="sectionHeader" style="text-align: left;font-size: 2.4rem;">
+        Apply Now
+    </h1>
+
+    <div class="midCol" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
+        <div
+            style="display: block;width: max-content;width: calc(90vw);max-width: 600px;padding: 20px;font-size: 1.8rem;">
+            How to Apply: Please email your CV + your academic certificates + marksheets + other academic/skill
+            certificates + experience certificates, as a single PDF file to the email ID: <a
+                href="mailto:info@risefoundationiiser.co.in"
+                style="text-decoration: none;color: inherit;">info@risefoundationiiser.co.in</a>
+
+            <br>
+            <br>
+
+            Selection Process: Only shortlisted candidates will be called for interview and demonstration of skills. By
+            email. RISE Foundation IISER will have the right to recruit / not recruit any or all candidate(s) without
+            assigning any reasons.
+        </div>
+
+        <div style="width: inherit;background: inherit;display: flex;justify-content: center;border-radius: 24px;">
+            <iframe src="https://wdy3gn5h.nocodb.com/#/nc/form/9014f4d3-d627-4975-b680-4b5a3aa560be"
+                style="border: none; width: calc(90vw);height: 1000px;max-width: 600px;background: inherit;border-radius: inherit;"></iframe>
+        </div>
+    </div>
+
+    <div style="height: 30px;"></div>
+
 
     <!-- contact info -->
+
 
     <!-- footer common on every page -->
 
@@ -322,6 +357,131 @@
         </div>
         <hr>
     </div>
+
+
+    <script>
+        const nocodb_richtext_parser = (text) => {
+            // Split the text into lines
+            const makeLines = () => {
+                try {
+                    console.log('hi');
+                    return text.split(/\r?\n/)
+                } catch (e) {
+                    console.log('hi');
+                    return []
+                }
+            }
+
+            lines = makeLines()
+
+            console.log(lines);
+
+            let toHTML = "";
+            let inList = false; // Flag to track if we're currently processing a list
+
+            for (const line of lines) {
+                // Check for heading based on indicator or leading characters
+                let headingLevel = 0;
+                if (/^### (.*$)/.test(line)) {
+                    headingLevel = 3;
+                } else if (/^=+/.test(line)) {
+                    headingLevel = line.match(/=/g).length;
+                } else if (/^-+/.test(line)) {
+                    headingLevel = line.match(/-/g).length;
+                }
+
+                // Handle unordered list
+                if (/^\* /.test(line)) {
+                    // Start of a list item
+                    if (!inList) {
+                        toHTML += "<ul>";
+                        inList = true;
+                    }
+                    toHTML += `<li>${line.slice(2).trim()}</li>`; // Extract content after * and trim
+                } else if (inList && line.trim() === "") {
+                    // Empty line within a list, consider it the end of the list
+                    toHTML += "</ul>";
+                    inList = false;
+                } else {
+                    // Handle headings or standard formatting if not in list
+                    if (headingLevel > 0) {
+                        const content = line.slice(headingLevel + (headingLevel === 3 ? 3 : 1)).trim();
+                        toHTML += `<h${headingLevel}>${content}</h${headingLevel}>`;
+                    } else {
+                        toHTML += line
+                            .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+                            .replace(/\*(.*)\*/gim, '<i>$1</i>').replace(/~(.*)~/gim, '<s>$1</s>').replace(/_(.*)_/gim, '<u>$1</u>');
+                    }
+                }
+            }
+
+            // Close any remaining open list
+            if (inList) {
+                toHTML += "</ul>";
+            }
+
+            return toHTML.trim(); // Remove leading/trailing whitespace
+        };
+
+
+        // const coolMessage = `
+        //     "**hi:**\n\n_iuashfuhdfudh_ ~isdhushfd~<br />\n\n**Hi:**\n\n<u>asjiajsidjiadj</u><br>\n\n<u>h1text</u>\n=============<br>\n\n<u>h2text</u>\n-------------<br>\n\n### <u>h3text</u><br>\n\nh3text\n======<br>\n\n*   sdfhu\n    \n*   dufhusdfh\n    \n*   sfudhfuds\n    \n*   isjdfij\n    <br>\n\nNumbered list<br>\n\n1.  uisdhfusd\n    \n2.  sdufhusdhfu'\n    \n3.  sdufhusdf\n    \n4.  sdfu\n    <br>\n\n[ ] aushfuf\n\n[x] asufhusdfh\n\n[x] asfuhu<br>\n\n> quote hiasihasfh<br>\n\n    here is some code\n\n[asduhaudshasu](https://ko.com)\n\n<br />"
+        //     `;
+
+        // console.log(nocodb_richtext_parser(coolMessage));
+    </script>
+
+    <script>
+
+        const req_options_1 = { method: 'GET', headers: {} };
+
+        viewID_1 = 'd4b53346-08ac-4817-8a68-4806b9b97527'
+
+        fetch('https://app.nocodb.com/api/v1/db/public/shared-view/' + viewID_1 + '/rows?l=1000', req_options_1)
+            .then(response => response.json())
+            .then(response => {
+
+                console.log(response);
+
+                openingsSection = document.getElementById('openings')
+
+                response.list.forEach(opening => {
+                    if (opening["Is Offer Active"] === 'True') {
+                        openingsSection.innerHTML += `
+                            <details class="JDdetails" >
+                                    <summary class="JDsummary">
+                                        ${opening["Job Title"]}
+                                    </summary>
+
+                                    <div style="padding:30px;">
+                                        <h3>Job Description :</h3> ${nocodb_richtext_parser(opening["Job Description"])}
+                                        <br/><br/>
+                                        
+                                        <h3>Education :</h3> ${nocodb_richtext_parser(opening["Education"])}
+                                        <br/><br/>
+                                        
+                                        <h3>Desired knowledge :</h3> ${nocodb_richtext_parser(opening["Desired knowledge"])}
+                                        <br/><br/>
+                                        
+                                        <h3>CTC :</h3> ${opening["CTC"]}
+                                        <br/><br/>
+                                        
+                                        <h3>Age Limit :</h3> ${opening["Age Limit"]}
+                                        <br/><br/>
+                                        
+                                        <h3>Other Eligliblity Criteria :</h3> ${nocodb_richtext_parser(opening["Other Eligliblity Criteria"])}
+                                    </div>
+                                
+                            </details>
+                        `
+                    }
+                });
+
+                // console.log(nocodb_richtext_parser(response.list[0].Responsibilities));
+            })
+
+    </script>
+
 
     <script src="/bg.js"></script>
     <!-- <script src="/networkBG.js"></script> -->

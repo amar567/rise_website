@@ -1,0 +1,60 @@
+.JDdetails {
+  max-width: 1200px;
+  width: calc(80vw);
+  margin: 1rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+}
+.JDdetails .JDsummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0;
+  transition: margin-bottom 0.4s;
+  position: relative;
+}
+.JDdetails .JDsummary::-webkit-details-marker,
+.JDdetails .JDsummary::marker {
+  display: none;
+}
+.JDdetails .JDsummary::after {
+  content: "+";
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-right: 1rem;
+  cursor: pointer;
+  background-color: rgba(0, 0, 255, 0.1);
+  padding: 0.75rem;
+  display: grid;
+  place-content: center;
+  aspect-ratio: 1;
+  line-height: 0;
+  position: absolute;
+  top: -0.5rem;
+  right: -1.5rem;
+  border-radius: 50%;
+}
+.JDdetails *:not(.JDsummary) {
+  animation-name: fade;
+  animation-duration: 0.4s;
+}
+
+details[open] .JDsummary {
+  margin-bottom: 1.5rem;
+}
+details[open] .JDsummary::after {
+  content: "−";
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
