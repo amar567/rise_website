@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+		<script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+		<script type="text/javascript">
+			window.tailwind.config = {
+				darkMode: ['class'],
+				theme: {
+					extend: {
+						colors: {
+							border: 'hsl(var(--border))',
+							input: 'hsl(var(--input))',
+							ring: 'hsl(var(--ring))',
+							background: 'hsl(var(--background))',
+							foreground: 'hsl(var(--foreground))',
+							primary: {
+								DEFAULT: 'hsl(var(--primary))',
+								foreground: 'hsl(var(--primary-foreground))'
+							},
+							secondary: {
+								DEFAULT: 'hsl(var(--secondary))',
+								foreground: 'hsl(var(--secondary-foreground))'
+							},
+							destructive: {
+								DEFAULT: 'hsl(var(--destructive))',
+								foreground: 'hsl(var(--destructive-foreground))'
+							},
+							muted: {
+								DEFAULT: 'hsl(var(--muted))',
+								foreground: 'hsl(var(--muted-foreground))'
+							},
+							accent: {
+								DEFAULT: 'hsl(var(--accent))',
+								foreground: 'hsl(var(--accent-foreground))'
+							},
+							popover: {
+								DEFAULT: 'hsl(var(--popover))',
+								foreground: 'hsl(var(--popover-foreground))'
+							},
+							card: {
+								DEFAULT: 'hsl(var(--card))',
+								foreground: 'hsl(var(--card-foreground))'
+							},
+						},
+					}
+				}
+			}
+		</script>
+		<style type="text/tailwindcss">
+			@layer base {
+				:root {
+					--background: 0 0% 100%;
+--foreground: 222.2 84% 4.9%;
+--card: 0 0% 100%;
+--card-foreground: 222.2 84% 4.9%;
+--popover: 0 0% 100%;
+--popover-foreground: 222.2 84% 4.9%;
+--primary: 221.2 83.2% 53.3%;
+--primary-foreground: 210 40% 98%;
+--secondary: 210 40% 96.1%;
+--secondary-foreground: 222.2 47.4% 11.2%;
+--muted: 210 40% 96.1%;
+--muted-foreground: 215.4 16.3% 46.9%;
+--accent: 210 40% 96.1%;
+--accent-foreground: 222.2 47.4% 11.2%;
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 210 40% 98%;
+--border: 214.3 31.8% 91.4%;
+--input: 214.3 31.8% 91.4%;
+--ring: 221.2 83.2% 53.3%;
+				}
+				.dark {
+					--background: 222.2 84% 4.9%;
+--foreground: 210 40% 98%;
+--card: 222.2 84% 4.9%;
+--card-foreground: 210 40% 98%;
+--popover: 222.2 84% 4.9%;
+--popover-foreground: 210 40% 98%;
+--primary: 217.2 91.2% 59.8%;
+--primary-foreground: 222.2 47.4% 11.2%;
+--secondary: 217.2 32.6% 17.5%;
+--secondary-foreground: 210 40% 98%;
+--muted: 217.2 32.6% 17.5%;
+--muted-foreground: 215 20.2% 65.1%;
+--accent: 217.2 32.6% 17.5%;
+--accent-foreground: 210 40% 98%;
+--destructive: 0 62.8% 30.6%;
+--destructive-foreground: 210 40% 98%;
+--border: 217.2 32.6% 17.5%;
+--input: 217.2 32.6% 17.5%;
+--ring: 224.3 76.3% 48%;
+				}
+			}
+		</style>
+  </head>
+  <body>
+    
+
+<div class="min-h-screen bg-background text-foreground">
+  <header class="bg-primary text-primary-foreground p-6 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold">DeepScience Incubator</h1>
+      <nav>
+        <button id="menu-toggle" class="block md:hidden focus:outline-none">
+          <img aria-hidden="true" alt="menu" src="https://openui.fly.dev/openui/24x24.svg?text=☰" />
+        </button>
+        <ul id="menu" class="hidden md:flex space-x-6">
+          <li><a href="#about" class="hover:underline">About</a></li>
+          <li><a href="#programs" class="hover:underline">Programs</a></li>
+          <li><a href="#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section
+    class="relative bg-secondary text-secondary-foreground min-h-screen flex items-center justify-center"
+    style="background-image: url('https://placehold.co/1920x1080'); background-size: cover; background-position: center;"
+  >
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-center px-6">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6">Empowering the Next Generation of Scientists</h2>
+      <p class="text-xl md:text-2xl mb-10">Join us in fostering innovation and research in the field of deep science.</p>
+      <button class="bg-primary text-primary-foreground py-3 px-6 rounded-lg hover:bg-primary/80 transition duration-300">Get Involved</button>
+    </div>
+  </section>
+
+  <section id="about" class="py-24 mx-4 md:mx-8 lg:mx-16">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-10">About Us</h2>
+      <div class="flex flex-col md:flex-row items-center">
+        <img src="https://placehold.co/400x300" alt="About DeepScience Incubator" class="w-full md:w-1/2 mb-8 md:mb-0 md:mr-8 rounded-lg shadow-lg" />
+        <p class="text-lg leading-relaxed">
+          DeepScience Incubator is a non-profit organization dedicated to supporting early-stage scientific research and innovation. We provide resources, mentorship, and funding to help scientists
+          bring their ideas to life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" class="bg-muted text-muted-foreground py-24 w-full">
+    <div class="container mx-auto px-4 md:px-8 lg:px-16">
+      <h2 class="text-4xl font-bold text-center mb-10">Our Programs</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="bg-card text-card-foreground p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <h3 class="text-2xl font-bold mb-4">Research Grants</h3>
+          <p class="text-lg">We offer grants to support groundbreaking research in deep science fields.</p>
+        </div>
+        <div class="bg-card text-card-foreground p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <h3 class="text-2xl font-bold mb-4">Mentorship</h3>
+          <p class="text-lg">Our mentorship program connects scientists with industry experts and experienced researchers.</p>
+        </div>
+        <div class="bg-card text-card-foreground p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <h3 class="text-2xl font-bold mb-4">Workshops</h3>
+          <p class="text-lg">We host workshops and seminars to help scientists develop their skills and knowledge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-24 mx-4 md:mx-8 lg:mx-16">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-10">Contact Us</h2>
+      <form class="max-w-lg mx-auto bg-card text-card-foreground p-10 rounded-lg shadow-lg">
+        <div class="mb-6">
+          <label for="name" class="block text-lg mb-2">Name</label>
+          <input type="text" id="name" class="w-full p-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-lg mb-2">Email</label>
+          <input type="email" id="email" class="w-full p-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+        </div>
+        <div class="mb-6">
+          <label for="message" class="block text-lg mb-2">Message</label>
+          <textarea id="message" class="w-full p-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+        </div>
+        <button type="submit" class="bg-primary text-primary-foreground py-3 px-6 rounded-lg hover:bg-primary/80 transition duration-300">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-primary text-primary-foreground py-6">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2023 DeepScience Incubator. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    var menu = document.getElementById('menu');
+    if (menu.classList.contains('hidden')) {
+      menu.classList.remove('hidden');
+      menu.classList.add('flex', 'flex-col', 'space-y-4', 'mt-4');
+    } else {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex', 'flex-col', 'space-y-4', 'mt-4');
+    }
+  });
+</script>
+
+
+  </body>
+</html>

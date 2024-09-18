@@ -234,7 +234,10 @@ class MiniGl {
                 }
             }
         });
-        const a = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+        const a = [ 1, 0, 0, 0,
+                    0, 1, 0, 0, 
+                    0, 0, 1, 0, 
+                    0, 0, 0, 1];
         _miniGl.commonUniforms = {
             projectionMatrix: new _miniGl.Uniform({
                 type: "mat4",
@@ -246,7 +249,7 @@ class MiniGl {
             }),
             resolution: new _miniGl.Uniform({
                 type: "vec2",
-                value: [1, 1]
+                value: [10, 10]
             }),
             aspectRatio: new _miniGl.Uniform({
                 type: "float",
@@ -498,7 +501,9 @@ class Gradient {
             if (4 === hex.length) {
                 const hexTemp = hex.substr(1).split("").map(hexTemp => hexTemp + hexTemp).join("");
                 hex = `#${hexTemp}`
+                
             }
+            // console.log(hex && `0x${hex.substr(1)}`);
             return hex && `0x${hex.substr(1)}`
         }).filter(Boolean).map(normalizeColor)
     }
@@ -525,6 +530,11 @@ class Gradient {
 
 // Create your instance
 const gradient = new Gradient()
+
+// gradient.amp = 0
+// gradient.sectionColors
+// gradient.toggleColor("#fff")
+// gradient.updateFrequency(0.00000010)
 
 // Call `initGradient` with the selector to your canvas
 gradient.initGradient('#gradient-canvas')

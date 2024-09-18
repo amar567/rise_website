@@ -1,0 +1,7 @@
+@media (min-width: 800px) {
+    .midCol {
+        width: 60%;
+        min-width: 800px;
+        text-align: center;
+    }
+}
